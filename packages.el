@@ -11,6 +11,7 @@
   '(calfw
     calfw-org
     org-gcal
+    org-timeline
     alert))
 
 (defun calendar/init-calfw ()
@@ -54,3 +55,14 @@
   "Initialize alert"
   (use-package alert
     :defer t))
+
+(defun calendar/init-org-timeline ()
+  "Initialize org-timeline to display timeline in org agenda"
+  (use-package org-timeline
+    :ensure t
+    :demand
+    :commands (org-timeline-insert-timeline)
+    :config
+    (add-hook 'org-agenda-finalize-hook 'org-timeline-insert-timeline :append)
+    )
+  )
